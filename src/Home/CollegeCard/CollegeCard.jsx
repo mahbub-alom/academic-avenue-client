@@ -1,6 +1,7 @@
 import React from "react";
 import law from "../../assets/college/law-college.jpg";
-import environment from '../../assets/college/environment.jpg'
+import environment from '../../assets/college/environment.jpg';
+import commerce from '../../assets/college/commerce.jpg'
 
 const CollegeCard = () => {
   return (
@@ -61,18 +62,18 @@ const CollegeCard = () => {
         </div>
         <div className="mt-10 bg-base-100 p-5 shadow-xl">
           <figure>
-            <img className="rounded-lg" src={law} alt="Shoes" />
+            <img className="rounded-lg h-96" src={commerce} alt="Shoes" />
           </figure>
           <div className="mt-5 ps-2">
-            <h2 className="text-3xl mb-2">Bangalore Law College</h2>
-            <p>Admission Date:25-07-2023 to 30-07-2023</p>
+            <h2 className="text-3xl mb-2">Dhaka Commerce College</h2>
+            <p>Admission Date:10-08-2023 to 25-08-2023</p>
             <div className="flex mb-2 justify-evenly">
               <div className="">
                 <h2 className="text-3xl font-bold mt-5">Events</h2>
-                <li>Moot Court Competition</li>
-                <li>Legal Symposium</li>
-                <li>Debate Tournament</li>
-                <li>Law Clinic Workshops</li>
+                <li>103rd Birth Anniversary of the father of the nation</li>
+                <li>Observing the Golden Jubilee of Independence</li>
+                <li>Historic 7th March Celebrated</li>
+                <li>Silver Jubilee along with Mujib-year</li>
               </div>
               <div className="">
                 <h2 className="text-3xl font-bold mt-5">Sports</h2>
@@ -82,7 +83,7 @@ const CollegeCard = () => {
                 <li>Table Tennis</li>
               </div>
             </div>
-            <h2><span className="font-bold">Research History:</span> Law School is renowned for  it&apos;s legal research, contributing to landmark issues and promoting sustainability worldwide.</h2>
+            <h2><span className="font-bold">Research History:</span> It appears that people living amidst nature are forgetting their natural environment. In order.</h2>
           </div>
         </div>
       </div>
