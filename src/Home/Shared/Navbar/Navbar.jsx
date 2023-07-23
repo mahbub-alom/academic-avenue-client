@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import logo from "../../../assets/Logo/navLogo.png";
 import { FaSearch } from "react-icons/fa";
 
@@ -9,24 +9,59 @@ const Navbar = () => {
   const navItem = (
     <>
       <li>
-        <Link to="/">Home</Link>
+        <NavLink
+          style={({ isActive, isPending }) => {
+            return {
+              color: isPending ? "black" : "white",
+              backgroundColor:isActive?"transparent":"transparent"
+            };
+          }}
+          to="/"
+        >
+          Home
+        </NavLink>
       </li>
       <li>
-        <Link to="/menu">Colleges</Link>
+        <NavLink  style={({ isActive, isPending }) => {
+            return {
+              color: isPending ? "black" : "white",
+              backgroundColor:isActive?"transparent":"transparent"
+            };
+          }} to="">Colleges</NavLink>
       </li>
       <li>
-        <Link to="/order/salad">Admission</Link>
+        <NavLink  style={({ isActive, isPending }) => {
+            return {
+              color: isPending ? "black" : "white",
+              backgroundColor:isActive?"transparent":"transparent"
+            };
+          }} to="">Admission</NavLink>
       </li>
       <li>
-        <Link to="/order/salad">My College</Link>
+        <NavLink  style={({ isActive, isPending }) => {
+            return {
+              color: isPending ? "black" : "white",
+              backgroundColor:isActive?"transparent":"transparent"
+            };
+          }} to="">My College</NavLink>
       </li>
       {user ? (
         <li>
-          <Link>Log Out</Link>
+          <NavLink  style={({ isActive, isPending }) => {
+            return {
+              color: isPending ? "black" : "white",
+              backgroundColor:isActive?"transparent":"transparent"
+            };
+          }}>Log Out</NavLink>
         </li>
       ) : (
         <li>
-          <Link to="/login">Login</Link>
+          <NavLink  style={({ isActive, isPending }) => {
+            return {
+              color: isPending ? "black" : "white",
+              backgroundColor:isActive?"transparent":"transparent"
+            };
+          }} to="/login">Login</NavLink>
         </li>
       )}
     </>
@@ -60,16 +95,18 @@ const Navbar = () => {
             </ul>
           </div>
           <img className="w-28 hidden md:inline" src={logo} alt="" />
-          <Link to="/" className="normal-case hidden md:inline text-xl">
+          <NavLink to="/" className="normal-case hidden md:inline text-xl">
             Academic <span className="text-blue-400">Avenue</span>
-          </Link>
+          </NavLink>
           <div className="flex gap-2 items-center">
             <input
               type="text"
               placeholder="Search College"
-              className="input ms-3 input-bordered input-info w-full max-w-xs"
+              className="input ms-3 input-bordered bg-opacity-30 input-info w-full max-w-xs"
             />
-            <button><FaSearch className="w-10" /></button>
+            <button>
+              <FaSearch className="w-10" />
+            </button>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
