@@ -6,7 +6,6 @@ import Register from "../Home/Shared/Registraion/Register";
 import ErrorPage from "../Home/Shared/ErrorPage/ErrorPage";
 import ProfileUpdate from "../Home/ProfileUpdate/ProfileUpdate";
 import Colleges from "../Colleges/Colleges";
-import PrivateRoute from "./PrivateRoute";
 import Admission from "../Admission/Admission";
 
 const router = createBrowserRouter([
@@ -29,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/colleges",
-        element: <PrivateRoute><Colleges></Colleges></PrivateRoute>,
+        element: <Colleges></Colleges>,
       },
       {
         path: "/update:id",
