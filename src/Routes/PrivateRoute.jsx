@@ -1,12 +1,13 @@
 import React from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+import Spinner from '../Home/Shared/Spinner/Spinner';
 
 const PrivateRoute = ({children}) => {
     const loading = true;
     const user= true;
     const location =  useLocation();
     if(loading){
-        return <span className="loading loading-bars loading-lg"></span>
+        return <Spinner></Spinner>
     }
     if(user){
         return children;

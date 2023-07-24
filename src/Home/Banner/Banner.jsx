@@ -1,64 +1,16 @@
-import React from "react";
-import img1 from "../../assets/Banner/img1.jpg";
-import img2 from "../../assets/Banner/img2.jpg";
-import img3 from "../../assets/Banner/img3.jpg";
-import img4 from "../../assets/Banner/img4.jpg";
+import React from 'react';
+import banner from '../../assets/Banner/banner.png'
 
 const Banner = () => {
   return (
-    <div className="carousel md:h-3/4 h-full w-full">
-      <div id="slide1" className="carousel-item relative w-full">
-        <img src={img2} className="w-full" />
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="#slide4" className="btn btn-circle">
-            ❮
-          </a>
-          <a href="#slide2" className="btn btn-circle">
-            ❯
-          </a>
-        </div>
+    <div className='pt-28 md:pt-32 flex justify-between flex-wrap items-center gap-5'>
+      <div className='md:w-1/2 w-full'>
+        <h1 className='text-6xl'>Find Your best <span className='text-blue-400'><br /> College</span><br /> From Here</h1>
+        <h2 className='mt-5'>Welcome to Our Academic Avenue College Apply Platform Embrace Possibility Choose Your Dream College, and Set Yourself on the Road to Achievement. Streamlined Applications, Expert Guidance and a World of Possibilities Await. Transform Your Aspirations into Reality.</h2>
+        <button className='btn text-white btn-info mt-5'>More Details</button>
       </div>
-      <div id="slide2" className="carousel-item relative w-full">
-        <img
-          src={img1}
-          className="w-full"
-        />
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="#slide1" className="btn btn-circle">
-            ❮
-          </a>
-          <a href="#slide3" className="btn btn-circle">
-            ❯
-          </a>
-        </div>
-      </div>
-      <div id="slide3" className="carousel-item relative w-full">
-        <img
-          src={img3}
-          className="w-full"
-        />
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="#slide2" className="btn btn-circle">
-            ❮
-          </a>
-          <a href="#slide4" className="btn btn-circle">
-            ❯
-          </a>
-        </div>
-      </div>
-      <div id="slide4" className="carousel-item relative w-full">
-        <img
-          src={img4}
-          className="w-full"
-        />
-        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-          <a href="#slide3" className="btn btn-circle">
-            ❮
-          </a>
-          <a href="#slide1" className="btn btn-circle">
-            ❯
-          </a>
-        </div>
+      <div className='md:inline hidden'>
+        <img className='w-64' src={banner} alt="" />
       </div>
     </div>
   );

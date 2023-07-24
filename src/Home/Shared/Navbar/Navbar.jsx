@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../../assets/Logo/navLogo.png";
 import { FaSearch } from "react-icons/fa";
+import { AuthContext } from "../../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
-  const user = true;
+  const { user, logOut } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOut();
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "User LogOut successfully",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
 
   const navItem = (
     <>
@@ -13,7 +26,7 @@ const Navbar = () => {
           style={({ isActive, isPending }) => {
             return {
               color: isPending ? "black" : "white",
-              backgroundColor:isActive?"transparent":"transparent"
+              backgroundColor: isActive ? "transparent" : "transparent",
             };
           }}
           to="/"
@@ -22,46 +35,71 @@ const Navbar = () => {
         </NavLink>
       </li>
       <li>
-        <NavLink  style={({ isActive, isPending }) => {
+        <NavLink
+          style={({ isActive, isPending }) => {
             return {
               color: isPending ? "black" : "white",
-              backgroundColor:isActive?"transparent":"transparent"
+              backgroundColor: isActive ? "transparent" : "transparent",
             };
-          }} to="">Colleges</NavLink>
+          }}
+          to=""
+        >
+          Colleges
+        </NavLink>
       </li>
       <li>
-        <NavLink  style={({ isActive, isPending }) => {
+        <NavLink
+          style={({ isActive, isPending }) => {
             return {
               color: isPending ? "black" : "white",
-              backgroundColor:isActive?"transparent":"transparent"
+              backgroundColor: isActive ? "transparent" : "transparent",
             };
-          }} to="">Admission</NavLink>
+          }}
+          to=""
+        >
+          Admission
+        </NavLink>
       </li>
       <li>
-        <NavLink  style={({ isActive, isPending }) => {
+        <NavLink
+          style={({ isActive, isPending }) => {
             return {
               color: isPending ? "black" : "white",
-              backgroundColor:isActive?"transparent":"transparent"
+              backgroundColor: isActive ? "transparent" : "transparent",
             };
-          }} to="">My College</NavLink>
+          }}
+          to=""
+        >
+          My College
+        </NavLink>
       </li>
       {user ? (
         <li>
-          <NavLink  style={({ isActive, isPending }) => {
-            return {
-              color: isPending ? "black" : "white",
-              backgroundColor:isActive?"transparent":"transparent"
-            };
-          }}>Log Out</NavLink>
+          <NavLink
+            onClick={handleLogout}
+            style={({ isActive, isPending }) => {
+              return {
+                color: isPending ? "black" : "white",
+                backgroundColor: isActive ? "transparent" : "transparent",
+              };
+            }}
+          >
+            Log Out
+          </NavLink>
         </li>
       ) : (
         <li>
-          <NavLink  style={({ isActive, isPending }) => {
-            return {
-              color: isPending ? "black" : "white",
-              backgroundColor:isActive?"transparent":"transparent"
-            };
-          }} to="/login">Login</NavLink>
+          <NavLink
+            style={({ isActive, isPending }) => {
+              return {
+                color: isPending ? "black" : "white",
+                backgroundColor: isActive ? "transparent" : "transparent",
+              };
+            }}
+            to="/login"
+          >
+            Login
+          </NavLink>
         </li>
       )}
     </>
@@ -113,12 +151,14 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{navItem}</ul>
         </div>
         <div className="navbar-end">
-          <div className="avatar">
-            <div className="w-12 rounded-full">
-              {/* <img title={user.displayName} src={user.photoURL} /> */}
-              <img src="" alt="" />
-            </div>
-          </div>
+        {user && (
+              <div className="avatar">
+                <div className="w-12 h-12 rounded-full">
+                  <img title={user?.displayName} src={ user?.photoURL} />
+                </div>
+              </div>
+            )}
+
         </div>
       </div>
     </>

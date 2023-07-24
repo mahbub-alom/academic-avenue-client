@@ -6,7 +6,7 @@ import commerce from '../../assets/college/commerce.jpg'
 const CollegeCard = () => {
   return (
     <div className="mt-10 text-black">
-      <h2 className="text-6xl text-center">Our Popular College</h2>
+      <h2 className="text-6xl text-center">Popular Colleges</h2>
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         <div className="mt-10 bg-base-100 p-5 shadow-xl">
           <figure>
@@ -32,6 +32,9 @@ const CollegeCard = () => {
               </div>
             </div>
             <h2><span className="font-bold">Research History:</span> Law School is renowned for  it&apos;s legal research, contributing to landmark issues and promoting sustainability worldwide.</h2>
+          </div>
+          <div className="flex justify-end">
+          <button className='btn text-white btn-info mt-5'>View Details</button>
           </div>
         </div>
         <div className="mt-10 bg-base-100 p-5 shadow-xl">
@@ -59,6 +62,9 @@ const CollegeCard = () => {
             </div>
             <h2><span className="font-bold">Research History:</span> Environment Science College is dedicated to studying environmental issues and promoting sustainability worldwide.</h2>
           </div>
+          <div className="flex justify-end">
+          <button className='btn text-white btn-info mt-5'>View Details</button>
+          </div>
         </div>
         <div className="mt-10 bg-base-100 p-5 shadow-xl">
           <figure>
@@ -84,6 +90,9 @@ const CollegeCard = () => {
               </div>
             </div>
             <h2><span className="font-bold">Research History:</span> It appears that people living amidst nature are forgetting their natural environment. In order.</h2>
+          </div>
+          <div className="flex justify-end">
+          <button className='btn text-white btn-info mt-5'>View Details</button>
           </div>
         </div>
       </div>
