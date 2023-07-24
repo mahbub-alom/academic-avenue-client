@@ -24,7 +24,7 @@ const Admission = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         const formData = new FormData();
-        formData.append("image", data.classImage[0]);
+        formData.append("image", data.candidateImage[0]);
         fetch(img_hosting_url, {
           method: "POST",
           body: formData,
@@ -35,12 +35,13 @@ const Admission = () => {
             if (imgResponse.success) {
               const imgURL = imgResponse.data.display_url;
               const classData = {
-                className: data.className,
                 classImage: imgURL,
-                instructorName: user?.displayName,
-                instructorEmail: user?.email,
-                availableSeats: data.availableSeats,
-                price: data.price,
+                candidateName: user?.displayName,
+                candidateEmail: user?.email,
+                subject:user?.subject,
+                dataOfBirth:user?.birth,
+                phone:user?.phone,
+                address:user?.Address
               };
               handleSwalFireWithUpdate(classData);
             }
@@ -53,7 +54,7 @@ const Admission = () => {
   };
 
   const handleSwalFireWithUpdate = (classData) => {
-    fetch("http://localhost:5000/admission", {
+    fetch("http://localhost:5000/data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,12 +63,11 @@ const Admission = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.insertedId) {
           reset();
           Swal.fire(
-            `${classData.className} Added Successfully!`,
-            "Your class has been added.",
+            'Subject choice Successfully!',
+            "Your choice has been added.",
             "success"
           );
         }
@@ -78,37 +78,19 @@ const Admission = () => {
   return (
     <div className="pt-28">
       <Zoom>
-        <h1 className="text-2xl text-center font-semibold ">Admission Colleges</h1>
+        <h1 className="text-2xl text-center font-semibold ">
+          Admission Colleges
+        </h1>
       </Zoom>
       <div className="w-full mx-auto my-10">
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="w-11/12 md:w-9/12 mx-auto p-4 bg-gray-100 shadow-md rounded-md"
         >
-          <div className="flex gap-4">
-            <div className="mb-4 md:w-1/2">
-              <label className="text-gray-700 font-semibold">Class Name:</label>
-              <input
-                type="text"
-                {...register("className", { required: true })}
-                className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-              />
-            </div>
-            <div className="mb-4 md:w-1/2">
+          <div className="grid grid-cols-1 md:grid-cols-2">
+            <div className="mb-4 md:w-2/3">
               <label className="text-gray-700 font-semibold">
-                Class Image:
-              </label>
-              <input
-                type="file"
-                {...register("classImage", { required: true })}
-                className="file-input bg-indigo-100 h-11 file-input-bordered w-full "
-              />
-            </div>
-          </div>
-          <div className="md:flex gap-4">
-            <div className="mb-4 md:w-1/2">
-              <label className="text-gray-700 font-semibold">
-                Instructor Name:
+                Candidate Name:
               </label>
               <input
                 type="text"
@@ -117,35 +99,60 @@ const Admission = () => {
                 className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
-            <div className="mb-4 md:w-1/2">
+            <div className="mb-4 md:w-2/3">
               <label className="text-gray-700 font-semibold">
-                Instructor Email:
+                Candidate Image:
               </label>
               <input
-                type="email"
-                value={user?.email}
-                readOnly
-                className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                type="file"
+                {...register("candidateImage", { required: true })}
+                className="file-input bg-indigo-100 h-11 file-input-bordered w-full "
               />
             </div>
+            <div className="mb-4 w-2/3">
+            <label className="text-gray-700 font-semibold">
+              Candidate Email:
+            </label>
+            <input
+              type="email"
+              value={user?.email}
+              readOnly
+              className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+            />
           </div>
-
-          <div className="md:flex gap-4">
-            <div className="mb-4 md:w-1/2">
-              <label className="text-gray-700 font-semibold">
-                Available Seats:
-              </label>
+          <div className="mb-4 md:w-2/3">
+              <label className="text-gray-700 font-semibold">Subject:</label>
               <input
-                type="number"
-                {...register("availableSeats", { required: true })}
+                type="text"
+                {...register("subject", { required: true })}
                 className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
-            <div className="mb-4 md:w-1/2">
-              <label className="text-gray-700 font-semibold">Price:</label>
+            <div className="mb-4 md:w-2/3">
+              <label className="text-gray-700 font-semibold">
+                Candidate Phone Number
+              </label>
               <input
                 type="number"
-                {...register("price", { required: true })}
+                {...register("phone", { required: true })}
+                className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+            <div className="mb-4 md:w-2/3">
+              <label className="text-gray-700 font-semibold">Address</label>
+              <input
+                type="text"
+                {...register("Address", { required: true })}
+                className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              />
+            </div>
+            <div className="mb-4 md:w-2/3">
+              <label className="text-gray-700 font-semibold">
+                Date of birth
+              </label>
+              <input
+                type="number"
+                {...register("birth", { required: true })}
                 className="w-full px-3 py-2 mt-1 text-gray-700 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
