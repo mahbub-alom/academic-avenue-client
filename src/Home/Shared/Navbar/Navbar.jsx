@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 import logo from "../../../assets/Logo/navLogo.png";
 import { FaSearch } from "react-icons/fa";
 import { AuthContext } from "../../../Providers/AuthProvider";
@@ -7,6 +7,12 @@ import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [datas, setDatas] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => setDatas(data));
+  }, []);
 
   const handleLogout = () => {
     logOut();
@@ -42,7 +48,7 @@ const Navbar = () => {
               backgroundColor: isActive ? "transparent" : "transparent",
             };
           }}
-          to=""
+          to="/colleges"
         >
           Colleges
         </NavLink>
@@ -55,7 +61,7 @@ const Navbar = () => {
               backgroundColor: isActive ? "transparent" : "transparent",
             };
           }}
-          to=""
+          to="/admission"
         >
           Admission
         </NavLink>
@@ -150,15 +156,17 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navItem}</ul>
         </div>
-        <div className="navbar-end">
-        {user && (
-              <div className="avatar">
-                <div className="w-12 h-12 rounded-full">
-                  <img title={user?.displayName} src={ user?.photoURL} />
-                </div>
-              </div>
-            )}
 
+        <div className="navbar-end">
+          {user && (
+            <div className="avatar">
+              <div className="w-12 h-12 rounded-full">
+               {datas.map(data=> <Link key={data._id} to={`update/${data._id}`}>
+                  <img title={user?.displayName} src={user?.photoURL} />
+                </Link>)}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>
