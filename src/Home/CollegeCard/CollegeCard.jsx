@@ -7,7 +7,7 @@ const CollegeCard = () => {
   const [allData, setAllData] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/collegeData")
+    fetch("https://academic-avenue-server-six.vercel.app/collegeData")
       .then((res) => res.json())
       .then((data) => setAllData(data));
   }, []);

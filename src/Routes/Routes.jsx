@@ -34,7 +34,7 @@ const router = createBrowserRouter([
         path: "/update:id",
         element: <ProfileUpdate></ProfileUpdate>,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/users/${params.id}`),
+          fetch(`https://academic-avenue-server-six.vercel.app/users/${params.id}`),
       },
       {
         path:'/admission',

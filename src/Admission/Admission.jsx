@@ -54,7 +54,7 @@ const Admission = () => {
   };
 
   const handleSwalFireWithUpdate = (classData) => {
-    fetch("http://localhost:5000/data", {
+    fetch("https://academic-avenue-server-six.vercel.app/data", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

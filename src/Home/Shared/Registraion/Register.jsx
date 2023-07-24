@@ -45,7 +45,7 @@ const Register = () => {
           university: data.university,
         };
         console.log("saved user", userDetails);
-        fetch('http://localhost:5000/users',{
+        fetch('https://academic-avenue-server-six.vercel.app/users',{
           method:"POST",
           headers:{
             "content-type":"application/json"
