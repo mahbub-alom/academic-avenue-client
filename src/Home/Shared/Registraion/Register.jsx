@@ -3,24 +3,26 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import regiImg from "../../../assets/Login and registration/register.jpg";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../Providers/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const { registerWithPass, updateUserProfile } = useContext(AuthContext);
   const [passMatch, setPassMatch] = useState("");
 
-  // const location = useLocation();
-  // const navigate = useNavigate();
-  // const from = location.state?.from?.pathname || "/";
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location.state?.from?.pathname || "/";
 
   const onSubmit = (data) => {
     // console.log(data);
 
-    if (data?.password !== data.confirmPassword) {
+    if (data?.password !== data?.confirmPassword) {
       setPassMatch("Password not matched");
       return;
     } else {
@@ -28,23 +30,50 @@ const Register = () => {
     }
 
     //creating a new user
-    registerWithPass(data?.email, data?.password).then((result) => {
-      const loggedUser = result.user;
-      console.log(loggedUser);
+    registerWithPass(data?.email, data?.password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
 
-      //add additional information of the user
-      updateUserProfile(data?.name, data?.photoURL).then(() => {
-        const saveUser = {
+        // add additional information of user
+        updateUserProfile(data?.name, data?.photoURL).then(() => {
+          const userDetails = {
           name: data.name,
           email: data.email,
           photoURL: data.photoURL,
           address: data.address,
           university: data.university,
         };
-        console.log("saved user", saveUser);
-      });
+        console.log("saved user", userDetails);
+        fetch('http://localhost:5000/users',{
+          method:"POST",
+          headers:{
+            "content-type":"application/json"
+          },
+          body:JSON.stringify(userDetails)
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          // console.log("after post",data)
+          if (data?.insertedId) {
+            reset();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "User created successfully.",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate(from, { replace: true });
+          }
+        });
     });
-  };
+  })
+  .catch((err) => {
+    console.log(err.message);
+    Swal.fire("Something went wrong", `${err.message}`, "error");
+  });
+};
 
   return (
     <div className="grid grid-cols-1 pt-20 pe-10 sm:grid-cols-2 h-full w-full mt-4">

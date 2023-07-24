@@ -8,6 +8,8 @@ import {
   signOut,
   signInWithPopup,
   GoogleAuthProvider,
+  sendPasswordResetEmail,
+  GithubAuthProvider,
 } from "firebase/auth";
 import app from "../Firebase/Firebase.config";
 
@@ -21,6 +23,7 @@ const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   const googleProvider = new GoogleAuthProvider(auth);
+  const githubProvider = new GithubAuthProvider(auth);
 
   const registerWithPass = (email, password) => {
     setLoading(true);
@@ -44,13 +47,24 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  const resetPassword = email => {
+    setLoading(true)
+    return sendPasswordResetEmail(auth, email)
+  }
+
+
   const googleSignIn = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
   };
+  const githubSignIn = () => {
+    setLoading(true);
+    return signInWithPopup(auth, githubProvider);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setLoading(false);
       setUser(currentUser);
       console.log(currentUser,'firebase user');
     });
@@ -62,11 +76,15 @@ const AuthProvider = ({ children }) => {
   const authInfo = {
     user,
     loading,
+    setLoading,
     logIn,
     googleSignIn,
     logOut,
     registerWithPass,
     updateUserProfile,
+    resetPassword,
+    githubSignIn
+    
   };
 
   return (
